@@ -1,15 +1,30 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
+import "./EightBall.css"
+import defaultAnswers from "./answers.json";
+import { choice } from "./random";
 
-function Eightball ({msg,color}){
-  
+
+
+function EightBall({ answers = defaultAnswers }) {
+  const [answer, setAnswer] = useState({
+    msg: "Think of A Question.",
+    color: "black",
+  });
+
+  function handleClick(evt) {
+    setAnswer(choice(answers));
+  }
 
   return (
-    <div>
-      <h3>message: {msg}</h3>
-      <h3>color: {color}</h3>
-    </div>
-  )
+    <div
+    className="EightBall"
+    onClick={handleClick}
+    style={{ backgroundColor:answer.color}}
+    >
+      <b>{answer.msg}</b>
 
+    </div>
+  );
 }
 
-export default Eightball
+export default EightBall;
